@@ -95,10 +95,24 @@ The Slack Space value is a rough measure of the amount of bytes that are part of
 ## Tile Index
 
 The tile index immediately follows the bundle header, starting at file offset 64.  The index is a 128-by-128 array of tile index records, each one 8 bytes long, one such record per tile.  The total tile index size is 131,072 bytes.  This value is stored at file offset 60 within the bundle header.  The index records are stored in row major order in top-left orientation.  This means that the first tile index record corresponds to the top left tile within the bundle, whose absolute row and column are also used to name the bundle file.  The next index record is located immediately to the right of the first one.  The formula to compute the offset of the index record for a specific tile is:
-
+```
 TileIndexOffset = 64 + 8 * (128 * row + column)
-
+```
 where row and column numbers are relative to the row and column of the top-leftmost tile of the bundle.  Alternatively, a formula using the modulo operation % and the absolute row and column numbers relative to the top-leftmost tile within a level can be used:
-
+```
 TileIndexOffset = 64 + 8 * (128 * (row % 128) + (column % 128))
+```
+## Tile Index Record
+To find the content of a tile located at a specific row and tile location, first locate and read the tile index record matching the row and location as described above.  The tile offset and size can then be extracted from the tile index record and used to read the tile content itself.  Each tile data is contigous, but the order of the tiles within the bundle file is not defined.  It is possible to have unused space between tiles in the bundle file.
+A tile index record is an 8-byte, low-endian unsigned integer which contains both the starting tile offset within the file and the size of a tile.  The tile offset is stored in bits 0 to 39, while the tile size is located in bits 40 to 63. Bit 0 is the least significant bit, and both offset and size are stored in little-endian format.
+If IDX is the tile index value for a particular tile, and M is 2 to the power of 40, then the offset and size can be calculated as:
+```
+TileOffset = IDX % M
+TileSize = Floor(IDX / M)
+```
+All values used in the calculation above have to be 8-byte-or-larger integers.  The __TileOffset__ is an absolute offset within the bundle file indicating the location where the tile data starts.  The __TileSize__ is the size of the tile in bytes.  If a decoded index has a TileSize of zero, then the tile is not stored in the bundle, regardless of the TileOffset value.
 
+## Tile Record
+
+The original Compact Cache bundles stored the tile data prefixed by a 4 byte little endian integer field which stored the size of the tile.  To ease the transition to Compact Cache V2, this size field is retained.  Note that the file offset stored in the tile index record is the offset of the first byte of the tile, not the offset of the size record, which will start at _offset_ - 4.
+ 
