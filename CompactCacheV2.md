@@ -90,7 +90,7 @@ The bundle header is a 64-byte structure located at the beginning of the bundle 
 | 56 | 4 | Legacy	| 5 |
 | 60 | 4 | Index Size | 131072 |
 
-The Slack Space value is a rough measure of the amount of bytes that are part of the bundle but are not used.  It is used and updated by the ArcGIS cache editing tools.  The value contained here is not always accurate and should be left as zero.  The Legacy fields are there to ease the transition from the earlier version of Compact Cache, they should always have the default values.
+The Slack Space value is a rough measure of the amount of bytes that are part of the bundle but are not used.  It is used and updated by the ArcGIS cache editing tools.  The value contained here is not always accurate and should be left as zero.  The __Legacy__ fields are there to ease the transition from the earlier version of Compact Cache, they should always have the listed values.
 
 ## Tile Index
 
@@ -102,6 +102,8 @@ where row and column numbers are relative to the row and column of the top-leftm
 ```
 TileIndexOffset = 64 + 8 * (128 * (row % 128) + (column % 128))
 ```
+The fixed part of a Compact Cache V2 bundle consists of the header and the tile index, and is 131072 + 64 bytes in size.
+
 ## Tile Index Record
 To find the content of a tile located at a specific row and tile location, first locate and read the tile index record matching the row and location as described above.  The tile offset and size can then be extracted from the tile index record and used to read the tile content itself.  Each tile data is contigous, but the order of the tiles within the bundle file is not defined.  It is possible to have unused space between tiles in the bundle file.
 A tile index record is an 8-byte, low-endian unsigned integer which contains both the starting tile offset within the file and the size of a tile.  The tile offset is stored in bits 0 to 39, while the tile size is located in bits 40 to 63. Bit 0 is the least significant bit, and both offset and size are stored in little-endian format.
