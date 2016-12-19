@@ -5,11 +5,23 @@
 # Author:      luci6974
 #
 # Created:     20/09/2016
-# Copyright:   (c) luci6974 2016
-# Licence:
+#
+#  Copyright 2016 Esri
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.?
+#
 #-------------------------------------------------------------------------------
 #
-# Individual tile files to the esri Compact Cache V2 format
+# Converts individual tile files to the esri Compact Cache V2 format
 #
 # Takes two arguments, the first one is the input level folder
 # the second one being the output level folder for the bundles
