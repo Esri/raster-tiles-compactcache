@@ -11,6 +11,14 @@ The algorithm loops over files in a row folder, inserting each tile in the appro
 Optionally, if the global variable USEGZ is True, compresses every input
 tile with gzip before storing it into the bundle.
 
+The [sample_tiles] (../sample_tiles) folder contains individual jpeg tiles for the first three level of a cache in Web Mercator projection.  The [sample_cache] (../sample_cache) folder contains a Compact Cache V2 cache produced from these individual tiles 
+using the Vundler.py script.  The commands used to generate the bundles for each level are:
+
+```
+python sample_code\Vundler.py sample_tiles\L00 sample_cache\_alllayers/L00
+python sample_code\Vundler.py sample_tiles\L01 sample_cache\_alllayers/L01
+python sample_code\Vundler.py sample_tiles\L02 sample_cache\_alllayers/L02
+```
 
 ## Licensing
 
