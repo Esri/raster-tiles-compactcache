@@ -38,19 +38,11 @@
 # words, make sure there are no spurious files and folders under the input
 # path, otherwise the output bundles might have strange content.
 #
-# Optionally, if the global variable USEGZ is True, compresses every input
-# tile with gzip before storing it into the bundle.
-#
 
 import sys
 import string
 import os.path
 import struct
-import gzip
-import cStringIO
-
-# If true, gzip the tiles before adding them
-USEGZ = False
 
 #Bundle linear size in tiles
 BSZ = 128
@@ -65,7 +57,7 @@ opath = None
 
 # The curr_* variable are used for caching of open output bundles
 # current bundle is kept open to reduce overhead
-# TODO: Eliminate global variable use
+# TODO: Eliminate global variables
 curr_bundle = None
 # A bundle index list
 # Array would be better, but it lacks 8 byte int support
@@ -154,25 +146,17 @@ def openbundle(row, col):
     curr_bundle.seek(0, os.SEEK_END)
     curr_offset = curr_bundle.tell()
 
-def add_tile(fname, row, usegz):
-    '''Add this tile to the output'''
+def add_tile(fname, row):
+    '''Add this tile to the output cache'''
     global BSZ, curr_bundle, curr_max, curr_offset
     col = int(os.path.splitext(os.path.basename(fname))[0])
 
-    # Read and gzip the tile if needed
+    # Read the tile data
     tile = open(fname, "rb").read()
-    if usegz:
-        sio = cStringIO.StringIO()
-        gzipper = gzip.GzipFile(fileobj = sio, mode = 'wb')
-        gzipper.write(tile)
-        gzipper.close()
-        tile = sio.getvalue()
-
-    # Make sure output bundle is current
-    openbundle(row, col)
     tsize = len(tile)
 
     # Write the tile at the end of the bundle, prefixed by size
+    openbundle(row, col)
     curr_bundle.write(struct.pack("<I", tsize))
     curr_bundle.write(tile)
     # Skip the size
@@ -186,12 +170,11 @@ def add_tile(fname, row, usegz):
     curr_max = max(curr_max, tsize)
 
 def dorow(folder, row):
-    global USEGZ
     '''Adds the tiles from one row folder'''
     r = int(row)
     for root, dirs, files in os.walk(os.path.join(folder,row)):
         for f in (os.path.join(folder, row, fn) for fn in files):
-            add_tile(f, r, USEGZ)
+            add_tile(f, r)
         break
 
 def main():
