@@ -5,7 +5,7 @@
 The Compact Cache V2 is the current file format used by ArcGIS to store raster tiles.  The Compact Cache V2 stores multiple tiles in a single file called a bundle.  The bundle file structure is very simple and optimized for quick access, the result being improved performance over other alternative formats.
 
 ## Content
-This repository contains [documentation](CompactCacheV2.md), a [sample cache](sample_cache) and a Python [code example](sample_code) of how to build Compact Cache V2 bundles from individual image tiles.
+This repository contains [documentation](CompactCacheV2.md), a [sample cache](sample_cache) and a Python 2.x [code example](sample_code) of how to build Compact Cache V2 bundles from individual image tiles.
 
 ## Licensing
 
