@@ -9,8 +9,6 @@ This Python script takes two arguments, the input level folder and the output le
 
 The script does not check the input tile format, and assumes that all the files and folders under the source contain valid tiles. The output might not be valid if non-tile files are present under the input folder.
 The algorithm loops over files in a row folder, inserting each tile in the appropriate bundle. It keeps one bundle open in case the next tile fits in the same bundle.  In most cases this combination results in good performance.
-Optionally, if the global variable USEGZ is True, compresses every input
-tile with gzip before storing it into the bundle.
 
 The [sample_tiles] (../sample_tiles) folder contains individual jpeg tiles for the first three level of a cache in Web Mercator projection.  The [sample_cache] (../sample_cache) folder contains a Compact Cache V2 cache produced from these individual tiles 
 using the Vundler.py script.  The commands used to generate the bundles for each level are:
