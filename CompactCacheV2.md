@@ -2,7 +2,7 @@
 ---
 An ESRI White Paper
 
-Compact Cache V2 is an Esri tile storage format introduced with the ArcGIS 10.2 release, offering improved performance over the original Compact Cache.  The purpose of this white paper is to document the internal structure of the Compact Cache V2 as used for map and imagery storage, to allow programmers to read and write data in Compact Cache V2.
+Compact Cache V2 is an Esri tile storage format introduced with the ArcGIS 10.3 release, offering improved performance over the original Compact Cache.  The purpose of this white paper is to document the internal structure of the Compact Cache V2 as used for map and imagery storage, to allow programmers to read and write data in Compact Cache V2.
 
 ## Why Compact Cache V2
 
