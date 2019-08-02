@@ -17,7 +17,14 @@ The Compact Cache V2 disk structure (illustrated in Figure 1) consists of a main
 
 The conf.xml file contains most metadata properties of the cache in XML format.  These properties include identification of the cache as a Compact Cache, spatial reference, top-left origin, tile size in pixels, tile image format, target screen resolution, the set of predefined LOD scales at which the tiles exist, and the size of the bundle measured in tiles.  Each scale defined in the conf.xml represents an LOD level, counted up from zero in order of decreasing scale.  Two successive level scales differ by a factor of two.  The content of the conf.xml is sufficient to determine the tile grid used by the cache and establish the mapping between the map coordinates and tiles within specific bundles.  Every tile within a cache is uniquely identified by the level, row and column numbers.  The row and column are measured from the top left origin of the cache, which itself is defined in the conf.xml file.
 
-The conf.cdi file contains the envelope of the extent of data in the cache, also in XML format.  It is used to eliminate slow file search operations for non-existing tile, mostly an Exploded Cache problem.
+### Cache Dataset Info
+The cache dataset info (conf.cdi) file contains the full envelope of the extent of data in the cache, in XML format with its spatial reference.  It uses the extent information to render the cache data. 
+
+| Element | Description |
+| --- | --- |
+| EnvelopeN | An array that defines the bounding box or full extents of the cache tiles |
+| SpatialReference | Spatial reference of the cache |
+
 
 ### Configuration File
 A Compact Cache V2 configuration file called conf.xml resides in the main cache folder (See Appendix A for an example).  This XML file describes various properties of the cache.  There are three main objects: __TileCacheInfo__, __TileImageInfo__ and __CacheStorageInfo__.
@@ -32,6 +39,7 @@ The __TileCacheInfo__ object contains metadata properties of the cache as a whol
 | TileRows | Tile height in pixels. Usually 256 or 512 |
 | DPI | The dots per inch value used in rendering the tiles |
 | LODInfos | A list of LODInfo elements, each one containing the level number, pixel resolution and the map scale |
+| PreciseDPI | this property is used for WMTS clients and is the same as DPI |
 
 The __Resolution__ field in the list of __LODInfos__ elements provides the accurate conversion between the pixel location and map coordinates.  The __Resolution__ value should agree with the __DPI__ and the __Scale__ fields, which are advisory only and might not provide full accuracy.  The __DPI__ value may be used to scale the cache tiles to the actual screen resolution to ensure readability of labels and other features.
 
