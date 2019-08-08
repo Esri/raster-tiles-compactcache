@@ -41,7 +41,14 @@ The __TileCacheInfo__ object contains metadata properties of the cache as a whol
 | LODInfos | A list of LODInfo elements, each one containing the level number, pixel resolution and the map scale |
 | PreciseDPI | this property is used for WMTS clients and is the same as DPI |
 
-The __Resolution__ field in the list of __LODInfos__ elements provides the accurate conversion between the pixel location and map coordinates.  The __Resolution__ value should agree with the __DPI__ and the __Scale__ fields, which are advisory only and might not provide full accuracy.  The __DPI__ value may be used to scale the cache tiles to the actual screen resolution to ensure readability of labels and other features.
+### LODInfo
+An object describing properties of level of detail.
+
+| Element | Description |
+| --- | --- |
+| LevelID | Numeric value assigned to the resolution of the cache tiles. The value 0 is assigned to the coarsest resolution of the cache tiling scheme |
+| Scale | The mapScale associated with the resolution |
+| Resolution | Resolution provides the accurate conversion between a pixel location and map coordinates. The Resolution value should agree with the dpi and the scale, which are advisory only and might not provide full accuracy. The dpi value may be used to scale the cache tiles to the actual screen resolution to ensure readability of labels and other features |
 
 The __TileImageInfo__ object describes the tile encoding and parameters used when creating tiles in the cache. The principal components are:
 
