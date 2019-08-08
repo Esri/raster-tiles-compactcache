@@ -14,9 +14,9 @@ The [sample_tiles] (../sample_tiles) folder contains individual jpeg tiles for t
 using the Vundler.py script.  The commands used to generate the bundles for each level are:
 
 ```
-python sample_code\Vundler.py sample_tiles\L00 sample_cache\_alllayers/L00
-python sample_code\Vundler.py sample_tiles\L01 sample_cache\_alllayers/L01
-python sample_code\Vundler.py sample_tiles\L02 sample_cache\_alllayers/L02
+python sample_code\Vundler.py sample_tiles\L00 sample_cache\_alllayers\L00
+python sample_code\Vundler.py sample_tiles\L01 sample_cache\_alllayers\L01
+python sample_code\Vundler.py sample_tiles\L02 sample_cache\_alllayers\L02
 ```
 
 ## Licensing
