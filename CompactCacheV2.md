@@ -31,16 +31,16 @@ The __TileCacheInfo__ object contains metadata properties of the cache as a whol
 | TileCols | Tile width in pixels. Usually 256 or 512 |
 | TileRows | Tile height in pixels. Usually 256 or 512 |
 | DPI | The dots per inch value used in rendering the tiles |
-| LODInfos | An array of objects describing  the level of details using the level number, pixel resolution and the map scale |
+| LODInfos | A list of LODInfo elements, each one containing the level number, pixel resolution and the map scale  |
 
-### lod
+### LODInfos
 An object describing properties of level of detail.
 
 | Element | Description |
 | --- | --- |
-| level | Numeric value assigned to the resolution of the cache tiles. The value 0 is assigned to the coarsest resolution of the cache tiling scheme |
-|scale | the mapScale |
-| resolution | Resolution provides the accurate conversion between a pixel location and map coordinates. The Resolution value should agree with the dpi and the scale, which are advisory only and might not provide full accuracy. The dpi value may be used to scale the cache tiles to the actual screen resolution to ensure readability of labels and other features |
+| LevelID | Numeric value assigned to the resolution of the cache tiles. The value 0 is assigned to the coarsest resolution of the cache tiling scheme |
+| Scale | The mapScale associated with the resolution |
+| Resolution | Resolution provides the accurate conversion between a pixel location and map coordinates. The Resolution value should agree with the dpi and the scale, which are advisory only and might not provide full accuracy. The dpi value may be used to scale the cache tiles to the actual screen resolution to ensure readability of labels and other features |
 
 The __TileImageInfo__ object describes the tile encoding and parameters used when creating tiles in the cache. The principal components are:
 
